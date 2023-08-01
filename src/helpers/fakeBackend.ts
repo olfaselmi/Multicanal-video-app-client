@@ -217,36 +217,36 @@ const fakeBackend = () => {
   /*
   profile
   */
-  mock.onGet(url.GET_PROFILE_DETAILS).reply(config => {
-    return new Promise((resolve, reject) => {
-      if (profileDetails) {
-        resolve([200, profileDetails]);
-      } else {
-        reject(["Some thing went wrong!"]);
-      }
-    });
-  });
+  // mock.onGet(url.GET_PROFILE_DETAILS).reply(config => {
+  //   return new Promise((resolve, reject) => {
+  //     if (profileDetails) {
+  //       resolve([200, profileDetails]);
+  //     } else {
+  //       reject(["Some thing went wrong!"]);
+  //     }
+  //   });
+  // });
 
   /*
   contacts
   */
-  mock.onGet(url.GET_CONTACTS).reply(config => {
-    return new Promise((resolve, reject) => {
-      if (contacts) {
-        resolve([200, contacts]);
-      } else {
-        reject(["Some thing went wrong!"]);
-      }
-    });
-  });
+  // mock.onGet(url.GET_CONTACTS).reply(config => {
+  //   return new Promise((resolve, reject) => {
+  //     if (contacts) {
+  //       resolve([200, contacts]);
+  //     } else {
+  //       reject(["Some thing went wrong!"]);
+  //     }
+  //   });
+  // });
 
-  mock.onPost(url.INVITE_CONTACT).reply(config => {
-    // const user = JSON.parse(config["data"]);
+  // mock.onPost(url.INVITE_CONTACT).reply(config => {
+  //   // const use r = JSON.parse(config["data"]);
 
-    return new Promise((resolve, reject) => {
-      resolve([200, "User is Invited"]);
-    });
-  });
+  //   return new Promise((resolve, reject) => {
+  //     resolve([200, "User is Invited"]);
+  //   });
+  // });
 
   /*
   calls
@@ -331,6 +331,7 @@ const fakeBackend = () => {
    */
   mock.onGet(url.GET_FAVOURITES).reply(config => {
     return new Promise((resolve, reject) => {
+    
       if (favourites) {
         resolve([200, favourites]);
       } else {
@@ -339,15 +340,15 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onGet(url.GET_DIRECT_MESSAGES).reply(config => {
-    return new Promise((resolve, reject) => {
-      if (directMessages) {
-        resolve([200, directMessages]);
-      } else {
-        reject(["Some thing went wrong!"]);
-      }
-    });
-  });
+  // mock.onGet(url.GET_DIRECT_MESSAGES).reply(config => {
+  //   return new Promise((resolve, reject) => {
+  //     if (directMessages) {
+  //       resolve([200, directMessages]);
+  //     } else {
+  //       reject(["Some thing went wrong!"]);
+  //     }
+  //   });
+  // });
 
   mock.onGet(url.GET_CHANNELS).reply(config => {
     return new Promise((resolve, reject) => {
@@ -359,26 +360,26 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPost(url.ADD_CONTACTS).reply(config => {
-    const data = JSON.parse(config["data"]);
+  // mock.onPost(url.ADD_CONTACTS).reply(config => {
+  //   const data = JSON.parse(config["data"]);
 
-    return new Promise((resolve, reject) => {
-      if (data) {
-        let newC: Array<any> = [];
-        for (let index = 0; index < (data || []).length; index++) {
-          const contactId = data[index];
-          const contact = contacts.find((c: any) => c.id + "" === contactId);
-          if (contact) {
-            newC = [...newC, contact];
-          }
-        }
-        onChangeDirectMessages([...directMessages, ...newC]);
-        resolve([200, "Contacts Added!"]);
-      } else {
-        reject(["Some thing went wrong!"]);
-      }
-    });
-  });
+  //   return new Promise((resolve, reject) => {
+  //     if (data) {
+  //       let newC: Array<any> = [];
+  //       for (let index = 0; index < (data || []).length; index++) {
+  //         const contactId = data[index];
+  //         const contact = contacts.find((c: any) => c.id + "" === contactId);
+  //         if (contact) {
+  //           newC = [...newC, contact];
+  //         }
+  //       }
+  //       onChangeDirectMessages([...directMessages, ...newC]);
+  //       resolve([200, "Contacts Added!"]);
+  //     } else {
+  //       reject(["Some thing went wrong!"]);
+  //     }
+  //   });
+  // });
 
   mock.onPost(url.CREATE_CHANNEL).reply(config => {
     const data = JSON.parse(config["data"]);
@@ -399,140 +400,140 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onGet(new RegExp(`${url.GET_CHAT_USER_DETAILS}/*`)).reply(config => {
-    const { params } = config;
-    let data: any;
-    if (params.id && contacts.length !== 0) {
-      const chat = (contacts || []).find(
-        (c: any) => c.id + "" === params.id + ""
-      );
-      if (chat) {
-        data = chat;
-      }
-    }
+  // mock.onGet(new RegExp(`${url.GET_CHAT_USER_DETAILS}/*`)).reply(config => {
+  //   const { params } = config;
+  //   let data: any;
+  //   if (params.id && contacts.length !== 0) {
+  //     const chat = (contacts || []).find(
+  //       (c: any) => c.id + "" === params.id + ""
+  //     );
+  //     if (chat) {
+  //       data = chat;
+  //     }
+  //   }
 
-    return new Promise((resolve, reject) => {
-      if (data) {
-        setTimeout(() => {
-          resolve([200, data]);
-        });
-      } else {
-        reject(["Your id is not found"]);
-      }
-    });
-  });
+  //   return new Promise((resolve, reject) => {
+  //     if (data) {
+  //       setTimeout(() => {
+  //         resolve([200, data]);
+  //       });
+  //     } else {
+  //       reject(["Your id is not found"]);
+  //     }
+  //   });
+  // });
 
-  mock
-    .onGet(new RegExp(`${url.GET_CHAT_USER_CONVERSATIONS}/*`))
-    .reply(config => {
-      const { params } = config;
+  // mock
+  //   .onGet(new RegExp(`${url.GET_CHAT_USER_CONVERSATIONS}/*`))
+  //   .reply(config => {
+  //     const { params } = config;
 
-      let data: any;
-      if (params.id && conversations.length !== 0) {
-        const chat = (conversations || []).find(
-          (c: any) => c.userId + "" === params.id + ""
-        );
-        if (chat) {
-          data = chat;
-        }
-      }
+  //     let data: any;
+  //     if (params.id && conversations.length !== 0) {
+  //       const chat = (conversations || []).find(
+  //         (c: any) => c.userId + "" === params.id + ""
+  //       );
+  //       if (chat) {
+  //         data = chat;
+  //       }
+  //     }
 
-      return new Promise((resolve, reject) => {
-        if (data) {
-          setTimeout(() => {
-            resolve([200, data]);
-          }, 500);
-        } else {
-          setTimeout(() => {
-            reject(["Your id is not found"]);
-          }, 500);
-        }
-      });
-    });
+  //     return new Promise((resolve, reject) => {
+  //       if (data) {
+  //         setTimeout(() => {
+  //           resolve([200, data]);
+  //         }, 500);
+  //       } else {
+  //         setTimeout(() => {
+  //           reject(["Your id is not found"]);
+  //         }, 500);
+  //       }
+  //     });
+  //   });
 
-  mock.onPost(url.SEND_MESSAGE).reply(config => {
-    const data = JSON.parse(config["data"]);
-    if (data && data.meta && data.meta.receiver && data.meta.sender) {
-      let modifiedC = [...conversations];
-      const conversationIdx = (conversations || []).findIndex(
-        (c: any) => c.userId + "" === data.meta.receiver + ""
-      );
-      if (conversationIdx > -1) {
-        const mid =
-          conversations[conversationIdx].messages &&
-          conversations[conversationIdx].messages.length
-            ? conversations[conversationIdx].messages.length + 1
-            : 1;
-        let newM: any = {
-          mId: mid,
-          text: data.text && data.text,
-          time: data.time,
-          meta: {
-            ...data.meta,
-            sent: true,
-            received: false,
-            read: false,
-          },
-        };
-        if (data.image && data.image.length) {
-          newM["image"] = data.image;
-        }
-        if (data.attachments && data.attachments.length) {
-          newM["attachments"] = data.attachments;
-        }
-        if (data.replyOf) {
-          newM["replyOf"] = data.replyOf;
-        }
+  // mock.onPost(url.SEND_MESSAGE).reply(config => {
+  //   const data = JSON.parse(config["data"]);
+  //   if (data && data.meta && data.meta.receiver && data.meta.sender) {
+  //     let modifiedC = [...conversations];
+  //     const conversationIdx = (conversations || []).findIndex(
+  //       (c: any) => c.userId + "" === data.meta.receiver + ""
+  //     );
+  //     if (conversationIdx > -1) {
+  //       const mid =
+  //         conversations[conversationIdx].messages &&
+  //         conversations[conversationIdx].messages.length
+  //           ? conversations[conversationIdx].messages.length + 1
+  //           : 1;
+  //       let newM: any = {
+  //         mId: mid,
+  //         text: data.text && data.text,
+  //         time: data.time,
+  //         meta: {
+  //           ...data.meta,
+  //           sent: true,
+  //           received: false,
+  //           read: false,
+  //         },
+  //       };
+  //       if (data.image && data.image.length) {
+  //         newM["image"] = data.image;
+  //       }
+  //       if (data.attachments && data.attachments.length) {
+  //         newM["attachments"] = data.attachments;
+  //       }
+  //       if (data.replyOf) {
+  //         newM["replyOf"] = data.replyOf;
+  //       }
 
-        conversations[conversationIdx].messages = [
-          ...conversations[conversationIdx].messages,
-          newM,
-        ];
-        modifiedC = [...conversations];
-      } else {
-        // new message first time
-        let newM: any = {
-          mId: 1,
-          text: data.text,
-          time: data.time,
-          meta: {
-            ...data.meta,
-            sent: true,
-            received: false,
-            read: false,
-          },
-        };
-        if (data.image && data.image.length) {
-          newM["image"] = data.image;
-        }
-        if (data.attachments && data.attachments.length) {
-          newM["attachments"] = data.attachments;
-        }
-        if (data.replyOf) {
-          newM["replyOf"] = data.replyOf;
-        }
-        const newC = {
-          conversationId: conversations.length + 1,
-          userId: data.meta.receiver,
-          messages: [
-            {
-              ...newM,
-            },
-          ],
-        };
-        modifiedC = [...conversations, newC];
-      }
-      onChangeConversations(modifiedC);
-    }
+  //       conversations[conversationIdx].messages = [
+  //         ...conversations[conversationIdx].messages,
+  //         newM,
+  //       ];
+  //       modifiedC = [...conversations];
+  //     } else {
+  //       // new message first time
+  //       let newM: any = {
+  //         mId: 1,
+  //         text: data.text,
+  //         time: data.time,
+  //         meta: {
+  //           ...data.meta,
+  //           sent: true,
+  //           received: false,
+  //           read: false,
+  //         },
+  //       };
+  //       if (data.image && data.image.length) {
+  //         newM["image"] = data.image;
+  //       }
+  //       if (data.attachments && data.attachments.length) {
+  //         newM["attachments"] = data.attachments;
+  //       }
+  //       if (data.replyOf) {
+  //         newM["replyOf"] = data.replyOf;
+  //       }
+  //       const newC = {
+  //         conversationId: conversations.length + 1,
+  //         userId: data.meta.receiver,
+  //         messages: [
+  //           {
+  //             ...newM,
+  //           },
+  //         ],
+  //       };
+  //       modifiedC = [...conversations, newC];
+  //     }
+  //     onChangeConversations(modifiedC);
+  //   }
 
-    return new Promise((resolve, reject) => {
-      if (data && data.meta && data.meta.receiver && data.meta.sender) {
-        resolve([200, "Channel Created!"]);
-      } else {
-        reject([400, "Some thing went wrong!"]);
-      }
-    });
-  });
+  //   return new Promise((resolve, reject) => {
+  //     if (data && data.meta && data.meta.receiver && data.meta.sender) {
+  //       resolve([200, "Channel Created!"]);
+  //     } else {
+  //       reject([400, "Some thing went wrong!"]);
+  //     }
+  //   });
+  // });
 
   mock.onPut(new RegExp(`${url.RECEIVE_MESSAGE}/*`)).reply(config => {
     const data = JSON.parse(config["data"]);
@@ -996,23 +997,23 @@ const fakeBackend = () => {
     });
   });
 
-  mock.onPut(new RegExp(`${url.UPDATE_ETTINGS}/*`)).reply(config => {
-    const data = JSON.parse(config["data"]);
-    const { field, value } = data;
-    const modifiedS: any = { ...settings };
-    modifiedS[field] = value;
-    onChangeSettings(modifiedS);
+  // mock.onPut(new RegExp(`${url.UPDATE_ETTINGS}/*`)).reply(config => {
+  //   const data = JSON.parse(config["data"]);
+  //   const { field, value } = data;
+  //   const modifiedS: any = { ...settings };
+  //   modifiedS[field] = value;
+  //   onChangeSettings(modifiedS);
 
-    return new Promise((resolve, reject) => {
-      if (modifiedS) {
-        setTimeout(() => {
-          resolve([200, "Setting Updated!"]);
-        });
-      } else {
-        reject(["Something went wrong!"]);
-      }
-    });
-  });
+  //   return new Promise((resolve, reject) => {
+  //     if (modifiedS) {
+  //       setTimeout(() => {
+  //         resolve([200, "Setting Updated!"]);
+  //       });
+  //     } else {
+  //       reject(["Something went wrong!"]);
+  //     }
+  //   });
+  // });
 };
 
 export default fakeBackend;

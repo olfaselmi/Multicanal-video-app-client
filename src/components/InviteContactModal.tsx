@@ -10,6 +10,8 @@ import {
   Input,
 } from "reactstrap";
 
+
+
 interface DataTypes {
   email: string | null;
   name: string | null;
@@ -20,6 +22,7 @@ interface InviteContactModalProps {
   onClose: () => void;
   onInvite: (data: any) => void;
 }
+
 const InviteContactModal = ({
   isOpen,
   onClose,

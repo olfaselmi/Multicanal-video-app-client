@@ -12,11 +12,21 @@ const Login = (state = INIT_STATE, action: any) => {
         case AuthLoginActionTypes.LOGIN_USER:
           return {
             ...state,
-            user: action.payload.data,
+            user: action.payload.data.user,
+            message:action.payload.data.message,
+            token: action.payload.data.token,
             loading: false,
             isUserLogin: true,
             isUserLogout: false,
           };
+          case AuthLoginActionTypes.LOAD_CURRENT_USER:
+            return {
+              ...state,
+              user: action.payload.data,
+              loading: false,
+              isUserLogin: true,
+              isUserLogout: false,
+            };
         case AuthLoginActionTypes.LOGOUT_USER:
           return {
             ...state,
@@ -36,6 +46,13 @@ const Login = (state = INIT_STATE, action: any) => {
             isUserLogin: false,
             loading: false,
           };
+          case AuthLoginActionTypes.LOAD_CURRENT_USER:
+            return {
+              ...state,
+              loading: false,
+              isUserLogin: false,
+              message : "Oops ! Something went wrong"
+            };
         case AuthLoginActionTypes.LOGOUT_USER:
           return {
             ...state,

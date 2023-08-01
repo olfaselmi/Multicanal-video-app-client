@@ -125,6 +125,7 @@ const Index = (props: IndexProps) => {
   api calling
   */
   const onChangeData = (field: string, value: any) => {
+    console.log(field,value)
     dispatch(updateSettings(field, value));
   };
 

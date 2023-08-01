@@ -305,7 +305,7 @@ const Message = ({
     ? chatUserDetails.profileImage
     : imagePlaceholder;
   const profile = isChannel ? channeluserProfile : chatUserprofile;
-  const date = formateDate(message.time, "hh:mmaaa");
+  const date = "";
   const isSent = message.meta.sent;
   const isReceived = message.meta.received;
   const isRead = message.meta.read;
@@ -391,7 +391,7 @@ const Message = ({
                       isFromMe={isFromMe}
                     />
                   )}
-
+                  
                   {hasText && (
                     <p className="mb-0 ctext-content">{message.text}</p>
                   )}

@@ -153,6 +153,7 @@ const ContactModal = ({ isOpen, onClose, onAddContact }: ContactModalProps) => {
   */
   const onSubmit = () => {
     onAddContact(selectedContacts);
+    console.log(selectedContacts)
   };
 
   return (

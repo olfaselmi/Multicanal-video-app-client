@@ -15,7 +15,7 @@ const getChannels = () => {
 };
 
 const addContacts = (contacts: Array<string | number>) => {
-  return api.create(url.ADD_CONTACTS, contacts);
+  return api.create(url.ADD_CONTACTS, {contacts});
 };
 
 const createChannel = (data: object) => {

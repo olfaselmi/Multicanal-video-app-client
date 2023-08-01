@@ -16,12 +16,15 @@ export const authLoginApiResponseError = (
 });
 
 export const loginUser = (user: any) => {
-  console.log("olfo");
   return {
     type: AuthLoginActionTypes.LOGIN_USER,
     payload: { user },
   };
 };
+
+export const loadCurrentUser = () => ({
+  type : AuthLoginActionTypes.LOAD_CURRENT_USER,
+});
 
 export const logoutUser = () => {
   return {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Alert, Form } from "reactstrap";
-
 // components
 import StartButtons from "./StartButtons";
 import InputSection from "./InputSection";
@@ -10,18 +9,21 @@ import Reply from "./Reply";
 
 // interface
 import { MessagesTypes } from "../../../../data/messages";
+import { useProfile } from "../../../../hooks";
 
 interface IndexProps {
   onSend: (data: any) => void;
   replyData: null | MessagesTypes | undefined;
   onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
   chatUserDetails: any;
+  sendMessageSocket : any;
 }
 const Index = ({
   onSend,
   replyData,
   onSetReplyData,
   chatUserDetails,
+  sendMessageSocket
 }: IndexProps) => {
   /*
   more menu collapse
@@ -72,6 +74,7 @@ const Index = ({
     if (text) {
       data["text"] = text;
     }
+    //sendMessageSocket(text,chatUserDetails.id.toString())
     if (images && images.length) {
       const imgs = (images || []).map((i: any, key: number) => {
         const src = URL.createObjectURL(i);

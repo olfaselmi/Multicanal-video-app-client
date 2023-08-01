@@ -1,15 +1,16 @@
 // @flow
 import React from "react";
-import { useForm, Resolver, SubmitHandler } from "react-hook-form";
+import { useForm, Resolver, SubmitHandler, FieldValues } from "react-hook-form";
 import { Form } from "reactstrap";
 
-interface VerticalFromProps<TFormValues> {
+interface VerticalFormProps<TFormValues extends FieldValues> {
   defaultValues?: any;
-  resolver?: Resolver<any>;
+  resolver?: Resolver<TFormValues>;
   children?: any;
-  onSubmit: SubmitHandler<any>;
+  onSubmit: SubmitHandler<TFormValues>;
   formClass?: string;
 }
+
 
 const VerticalForm = <
   TFormValues extends Record<string, any> = Record<string, any>
@@ -19,7 +20,7 @@ const VerticalForm = <
   children,
   onSubmit,
   formClass,
-}: VerticalFromProps<TFormValues>) => {
+}: VerticalFormProps<TFormValues>) => {
   /*
    * form methods
    */

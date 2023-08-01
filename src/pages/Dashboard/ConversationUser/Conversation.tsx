@@ -18,12 +18,16 @@ import ForwardModal from "../../../components/ForwardModal";
 
 // actions
 import { forwardMessage, deleteImage } from "../../../redux/actions";
+import { io } from "socket.io-client";
+
 interface ConversationProps {
   chatUserConversations: any;
   chatUserDetails: any;
   onDelete: (messageId: string | number) => any;
   onSetReplyData: (reply: null | MessagesTypes | undefined) => void;
   isChannel: boolean;
+  messagesList: any;
+  isTyping: any;
 }
 const Conversation = ({
   chatUserDetails,
@@ -31,6 +35,8 @@ const Conversation = ({
   onDelete,
   onSetReplyData,
   isChannel,
+  messagesList,
+  isTyping,
 }: ConversationProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
@@ -44,10 +50,10 @@ const Conversation = ({
     })
   );
 
-  const messages =
-    chatUserConversations.messages && chatUserConversations.messages.length
-      ? chatUserConversations.messages
-      : [];
+  // const messages =
+  //   chatUserConversations.isChannel && chatUserConversations.isChannel.length
+  //     ? chatUserConversations.isChannel
+  //     : [];
 
   const ref = useRef<any>();
   const scrollElement = useCallback(() => {
@@ -66,10 +72,17 @@ const Conversation = ({
   }, [ref]);
 
   useEffect(() => {
+    // setMessages(
+    //   chatUserConversations.messages && chatUserConversations.messages.length
+    //     ? chatUserConversations.messages
+    //     : []
+    // );
+
     if (ref && ref.current) {
       ref.current.recalculate();
     }
   }, []);
+
   useEffect(() => {
     if (chatUserConversations.messages) {
       scrollElement();
@@ -124,8 +137,8 @@ const Conversation = ({
         className="list-unstyled chat-conversation-list"
         id="chat-conversation-list"
       >
-        {(messages || []).map((message: MessagesTypes, key: number) => {
-          const isFromMe = message.meta.sender + "" === userProfile.uid + "";
+        {(messagesList || []).map((message: MessagesTypes, key: number) => {
+          const isFromMe = message.meta.sender === userProfile.user.id;
           return (
             <Message
               message={message}
@@ -151,6 +164,7 @@ const Conversation = ({
           onForward={onForwardMessage}
         />
       )}
+      {isTyping ? <>is typing ...</> : <></>}
     </AppSimpleBar>
   );
 };

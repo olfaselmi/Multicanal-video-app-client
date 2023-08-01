@@ -7,13 +7,14 @@ import { UserTypes } from "../../../data/chat";
 import { STATUS_TYPES } from "../../../constants";
 
 interface ChatUserProps {
-  user: UserTypes;
+  user: any;
   selectedChat: string | number;
   onSelectChat: (id: number | string) => void;
 }
 const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
   const fullName = `${user.firstName} ${user.lastName}`;
   const shortName = `${user.firstName.charAt(0)}${user.lastName.charAt(0)}`;
+
 
   const colors = [
     "bg-primary",
@@ -31,7 +32,8 @@ const ChatUser = ({ user, selectedChat, onSelectChat }: ChatUserProps) => {
   const isSelectedChat: boolean =
     selectedChat && selectedChat === user.id ? true : false;
   const onClick = () => {
-    onSelectChat(user.id);
+    onSelectChat(user.user);
+
   };
   return (
     <li className={classnames({ active: isSelectedChat })} onClick={onClick}>

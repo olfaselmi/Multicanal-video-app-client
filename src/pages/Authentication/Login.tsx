@@ -10,7 +10,7 @@ import {
 } from "reactstrap";
 
 //Social Media Imports
-import { GoogleLogin } from "react-google-login";
+//import { GoogleLogin } from "react-google-login";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 
 // router
@@ -39,7 +39,7 @@ import Loader from "../../components/Loader";
 interface LocationTypes {
   from?: Location;
 }
-interface LoginProps {}
+interface LoginProps { }
 const Login = (props: LoginProps) => {
   // global store
   const { dispatch, useAppSelector } = useRedux();
@@ -77,8 +77,8 @@ const Login = (props: LoginProps) => {
   );
 
   const defaultValues: any = {
-    email: "admin@themesbrand.com",
-    password: "123456",
+    email: "olfa.selmi@esprit.tn",
+    password: "azerty",
   };
 
   const methods = useForm({ defaultValues, resolver });
@@ -99,33 +99,33 @@ const Login = (props: LoginProps) => {
     return <Redirect to={{ pathname: redirectUrl }} />;
   }
 
-  const signIn = (res: any, type: "google" | "facebook") => {
-    if (type === "google" && res) {
-      const postData = {
-        name: res.profileObj.name,
-        email: res.profileObj.email,
-        token: res.tokenObj.access_token,
-        idToken: res.tokenId,
-      };
-      dispatch(socialLogin(postData, type));
-    } else if (type === "facebook" && res) {
-      const postData = {
-        name: res.name,
-        token: res.accessToken,
-      };
-      dispatch(socialLogin(postData, type));
-    }
-  };
+  // const signIn = (res: any, type: "google" | "facebook") => {
+  //   if (type === "google" && res) {
+  //     const postData = {
+  //       name: res.profileObj.name,
+  //       email: res.profileObj.email,
+  //       token: res.tokenObj.access_token,
+  //       idToken: res.tokenId,
+  //     };
+  //     dispatch(socialLogin(postData, type));
+  //   } else if (type === "facebook" && res) {
+  //     const postData = {
+  //       name: res.name,
+  //       token: res.accessToken,
+  //     };
+  //     dispatch(socialLogin(postData, type));
+  //   }
+  // };
 
   //handleFacebookLoginResponse
-  const facebookResponse = (response: object) => {
-    signIn(response, "facebook");
-  };
+  // const facebookResponse = (response: object) => {
+  //   signIn(response, "facebook");
+  // };
 
-  //handleGoogleLoginResponse
-  const googleResponse = (response: object) => {
-    signIn(response, "google");
-  };
+  // //handleGoogleLoginResponse
+  // const googleResponse = (response: object) => {
+  //   signIn(response, "google");
+  // };
 
   return (
     <NonAuthLayoutWrapper>
@@ -146,7 +146,7 @@ const Login = (props: LoginProps) => {
               {loginLoading && <Loader />}
               <div className="mb-3">
                 <FormInput
-                  label="Username"
+                  label="Email"
                   type="text"
                   name="email"
                   register={register}
@@ -199,7 +199,7 @@ const Login = (props: LoginProps) => {
                 <Row className="">
                   <div className="col-4">
                     <div>
-                      <FacebookLogin
+                      {/* <FacebookLogin
                         appId={config.FACEBOOK.APP_ID}
                         autoLoad={false}
                         callback={facebookResponse}
@@ -213,11 +213,11 @@ const Login = (props: LoginProps) => {
                             <i className="mdi mdi-facebook text-indigo"></i>
                           </button>
                         )}
-                      />
+                      /> */}
                     </div>
-                    <UncontrolledTooltip placement="top" target="facebook">
+                    {/* <UncontrolledTooltip placement="top" target="facebook">
                       Facebook
-                    </UncontrolledTooltip>
+                    </UncontrolledTooltip> */}
                   </div>
                   <div className="col-4">
                     <div>
@@ -235,7 +235,7 @@ const Login = (props: LoginProps) => {
                   </div>
                   <div className="col-4">
                     <div>
-                      <GoogleLogin
+                      {/* <GoogleLogin
                         clientId={
                           config.GOOGLE.CLIENT_ID ? config.GOOGLE.CLIENT_ID : ""
                         }
@@ -250,12 +250,12 @@ const Login = (props: LoginProps) => {
                           </button>
                         )}
                         onSuccess={googleResponse}
-                        onFailure={() => {}}
-                      />
+                        onFailure={() => { }}
+                      /> */}
                     </div>
-                    <UncontrolledTooltip placement="top" target="google">
+                    {/* <UncontrolledTooltip placement="top" target="google">
                       Google
-                    </UncontrolledTooltip>
+                    </UncontrolledTooltip> */}
                   </div>
                 </Row>
               </div>

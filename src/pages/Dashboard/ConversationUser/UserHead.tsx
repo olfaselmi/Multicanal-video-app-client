@@ -414,7 +414,7 @@ const UserHead = ({
           </ul>
         </Col>
       </Row>
-      <PinnedAlert onOpenPinnedTab={onOpenPinnedTab} />
+      {/* <PinnedAlert onOpenPinnedTab={onOpenPinnedTab} /> */}
       {isOpenAudioModal && (
         <AudioCallModal
           isOpen={isOpenAudioModal}

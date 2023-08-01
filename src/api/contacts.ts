@@ -8,6 +8,6 @@ const getContacts = (filters?: object) => {
 };
 
 const inviteContact = (data: object) => {
-  return api.create(url.INVITE_CONTACT, data);
+  return api.create("/api/contact/add-contact", data);
 };
 export { getContacts, inviteContact };

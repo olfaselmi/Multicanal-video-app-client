@@ -37,7 +37,7 @@ axios.interceptors.response.use(
  * @param {*} token
  */
 const setAuthorization = (token: any) => {
-  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  axios.defaults.headers.common["x-auth-token"] = token;
 };
 
 class APIClient {
@@ -45,6 +45,8 @@ class APIClient {
    * Fetches data from given url
    */
   get = (url: string, params?: {}) => {
+    const token :  any = localStorage.getItem("authUser");
+    setAuthorization(JSON.parse(token).token)
     return axios.get(url, params);
   };
 

@@ -13,6 +13,7 @@ import LockScreen from "../pages/Authentication/LockScreen";
 // dashboard
 import Dashboard from "../pages/Dashboard/index";
 import StarterPage from "../pages/StarterPage/index";
+import Room from "../pages/meet/Room";
 
 interface RouteProps {
   path: string;
@@ -27,6 +28,8 @@ const publicRoutes: Array<RouteProps> = [
   { path: "/auth-changepassword", component: ChangePassword },
   { path: "/auth-lock-screen", component: LockScreen },
   { path: "/logout", component: Logout },
+  { path: "/room/:roomID", component: Room },
+
 ];
 
 const privateRoutes: Array<RouteProps> = [

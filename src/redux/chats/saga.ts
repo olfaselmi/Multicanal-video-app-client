@@ -76,7 +76,7 @@ function* addContacts({ payload: contacts }: any) {
   try {
     const response: Promise<any> = yield call(addContactsApi, contacts);
     yield put(chatsApiResponseSuccess(ChatsActionTypes.ADD_CONTACTS, response));
-    yield call(showSuccessNotification, response + "");
+    yield call(showSuccessNotification, JSON.parse(JSON.stringify(response)).message + "");
   } catch (error: any) {
     yield call(showErrorNotification, error);
     yield put(chatsApiResponseError(ChatsActionTypes.ADD_CONTACTS, error));
@@ -121,6 +121,16 @@ function* getChatUserConversations({ payload: id }: any) {
     yield put(
       chatsApiResponseError(ChatsActionTypes.GET_CHAT_USER_CONVERSATIONS, error)
     );
+  }
+}
+
+function* addChatUserConversations({ payload: data }: any) {
+  try {
+    yield put(
+      chatsApiResponseSuccess(ChatsActionTypes.ADD_MESSAGE, data)
+    );
+  } catch (error: any) {
+    yield put(chatsApiResponseError(ChatsActionTypes.ADD_MESSAGE, error));
   }
 }
 
@@ -326,6 +336,11 @@ export function* watchGetChatUserConversations() {
     getChatUserConversations
   );
 }
+
+export function* watchAddChatUserConversations() {
+  yield takeEvery(ChatsActionTypes.ADD_MESSAGE, addChatUserConversations);
+}
+
 export function* watchOnSendMessage() {
   yield takeEvery(ChatsActionTypes.ON_SEND_MESSAGE, onSendMessage);
 }
@@ -384,6 +399,7 @@ function* chatsSaga() {
     fork(watchCreateChannel),
     fork(watchGetChatUserDetails),
     fork(watchGetChatUserConversations),
+    fork(watchAddChatUserConversations),
     fork(watchOnSendMessage),
     fork(watchReceiveMessage),
     fork(watchReadMessage),

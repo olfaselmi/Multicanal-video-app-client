@@ -22,11 +22,10 @@ import { changeTab } from "../../redux/actions";
 import { TABS } from "../../constants/index";
 import LightDarkMode from "../../components/LightDarkMode";
 
-//images
-import avatar1 from "../../assets/images/users/avatar-1.jpg";
 
 // menu
 import { MENU_ITEMS, MenuItemType } from "./menu";
+import { useSelector } from "react-redux";
 
 const LogoLightSVG = () => {
   return (
@@ -129,6 +128,10 @@ interface ProfileDropdownMenuProps {
 const ProfileDropdownMenu = ({ onChangeTab }: ProfileDropdownMenuProps) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen(!dropdownOpen);
+  const { user } = useSelector((state: any) => ({
+    user: state.Login.user,
+  }));
+
 
   return (
     <Dropdown
@@ -138,7 +141,7 @@ const ProfileDropdownMenu = ({ onChangeTab }: ProfileDropdownMenuProps) => {
       toggle={toggle}
     >
       <DropdownToggle nav className="bg-transparent">
-        <img src={avatar1} alt="" className="profile-user rounded-circle" />
+        <img src={user?.avatar} alt="" className="profile-user rounded-circle" />
       </DropdownToggle>
       <DropdownMenu>
         <DropdownItem

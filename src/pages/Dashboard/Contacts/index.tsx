@@ -55,10 +55,10 @@ const Index = (props: IndexProps) => {
   }, [contactsList]);
 
   useEffect(() => {
-    if (contacts.length > 0) {
-      const formattedContacts = divideByKey("firstName", contacts);
-      setContactsData(formattedContacts);
-    }
+    // if (contacts.length > 0) {
+    //   const formattedContacts = divideByKey("firstName", contacts);
+    //   setContactsData(formattedContacts);
+    // }
   }, [contacts]);
 
   /*

@@ -99,6 +99,7 @@ const Index = (props: IndexProps) => {
   onInvite handeling
   */
   const onInviteContact = (data: any) => {
+    console.log(data)
     dispatch(inviteContact(data));
   };
   useEffect(() => {

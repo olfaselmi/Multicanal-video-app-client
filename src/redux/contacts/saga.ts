@@ -32,13 +32,13 @@ function* getContacts({ payload: filters }: any) {
   }
 }
 
-function* inviteContact({ payload: newPassword }: any) {
+function* inviteContact({ payload: formData }: any) {
   try {
-    const response: Promise<any> = yield call(inviteContactApi, newPassword);
+    const response: Promise<any> = yield call(inviteContactApi, formData);
     yield put(
       contactsApiResponseSuccess(ContactsActionTypes.INVITE_CONTACT, response)
     );
-    yield call(showSuccessNotification, response + "");
+    yield call(showSuccessNotification, JSON.parse(JSON.stringify(response)).message + "");
   } catch (error: any) {
     yield call(showErrorNotification, error);
     yield put(

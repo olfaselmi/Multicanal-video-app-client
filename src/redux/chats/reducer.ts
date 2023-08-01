@@ -1,7 +1,7 @@
 // types
 import { ChatsActionTypes, ChatsState } from "./types";
 
-export const INIT_STATE: ChatsState = {
+export const INIT_STATE: any = {
   favourites: [],
   directMessages: [],
   channels: [],
@@ -11,6 +11,7 @@ export const INIT_STATE: ChatsState = {
   isOpenUserDetails: false,
   channelDetails: {},
   archiveContacts: [],
+  messages: [],
 };
 
 const Chats = (state = INIT_STATE, action: any) => {
@@ -63,11 +64,17 @@ const Chats = (state = INIT_STATE, action: any) => {
           return {
             ...state,
             chatUserConversations: action.payload.data,
+            messages: action.payload.data.messages,
             isUserConversationsFetched: true,
             getUserConversationsLoading: false,
             isUserMessageSent: false,
             isMessageDeleted: false,
             isMessageForwarded: false,
+          };
+        case ChatsActionTypes.ADD_MESSAGE:
+          return {
+            ...state,
+            messages: [...state.messages, action.payload.data],
           };
         case ChatsActionTypes.ON_SEND_MESSAGE:
           return {
@@ -180,6 +187,10 @@ const Chats = (state = INIT_STATE, action: any) => {
             getUserConversationsLoading: false,
             isUserMessageSent: false,
           };
+        case ChatsActionTypes.ADD_MESSAGE:
+          return {
+            ...state,
+          };
         case ChatsActionTypes.ON_SEND_MESSAGE:
           return {
             ...state,
@@ -283,6 +294,10 @@ const Chats = (state = INIT_STATE, action: any) => {
         isUserConversationsFetched: false,
         getUserConversationsLoading: true,
         isUserMessageSent: false,
+      };
+    case ChatsActionTypes.ADD_MESSAGE:
+      return {
+        ...state,
       };
     case ChatsActionTypes.TOGGLE_USER_DETAILS_TAB:
       return {

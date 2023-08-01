@@ -163,10 +163,11 @@ const FormInput: React.FunctionComponent<FormInputProps> = ({
                     </Label>
                   </div>
                   {errors && errors[name] ? (
-                    <FormFeedback type="invalid">
-                      {/* k{errors[name]["message"]} */}
-                    </FormFeedback>
-                  ) : null}
+  <FormFeedback type="invalid">
+    {errors[name]?.message ?? "Error message not available"}
+  </FormFeedback>
+) : null}
+
                 </>
               ) : (
                 <>
@@ -192,10 +193,11 @@ const FormInput: React.FunctionComponent<FormInputProps> = ({
                     tag="input"
                   />
                   {errors && errors[name] ? (
-                    <FormFeedback type="invalid">
-                      {/* k{errors[name]["message"]} */}
-                   </FormFeedback>
-                  ) : null}
+  <FormFeedback type="invalid">
+    {errors[name]?.message ?? "Error message not available"}
+  </FormFeedback>
+) : null}
+
                 </>
               )}
             </>

@@ -5,7 +5,7 @@ import "./assets/scss/theme.scss";
 
 // actions
 import { useSelector, useDispatch } from "react-redux";
-import { changelayoutMode } from "./redux/actions";
+import { changelayoutMode, getProfileDetails, loadCurrentUser } from "./redux/actions";
 
 //Route
 import Routes from "./routes";
@@ -44,6 +44,11 @@ const App = () => {
 
   // Dark/Light Mode 
   useEffect(() => {
+    const token :  any = localStorage.getItem("authUser");
+    if(JSON.parse(token)){
+      dispatch(loadCurrentUser())
+      dispatch(getProfileDetails())
+    }
     var getLayoutMode = localStorage.getItem("layoutMode");
     if (getLayoutMode) {
       dispatch(changelayoutMode(getLayoutMode));
